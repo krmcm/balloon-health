@@ -1,6 +1,8 @@
 import * as React from "react"
 import { StaticImage } from "gatsby-plugin-image"
+import Fade from '@mui/material/Fade';
 import type { HeadFC, PageProps } from "gatsby"
+import {useEffect, useState} from "react";
 
 const pageStyles = {
   color: "#232129",
@@ -12,13 +14,21 @@ const mudkip = {
 }
 
 const IndexPage: React.FC<PageProps> = () => {
+  const [doneLoading, setDoneLoading] = useState(false)
+
+  useEffect(() => {
+    setDoneLoading(true)
+  })
+
   return (
-    <main style={pageStyles}>
-      <h1>
-        this page will do something cool ... eventually
-      </h1>
-      <StaticImage src="../images/mudkip.jpeg" alt="mudkip" style={mudkip} placeholder="blurred"/>
-    </main>
+    <Fade in={doneLoading}>
+      <main style={pageStyles}>
+        <h1>
+            this page will do something cool ... eventually
+        </h1>
+        <StaticImage src="../images/mudkip.jpeg" alt="mudkip" style={mudkip} placeholder="blurred"/>
+      </main>
+    </Fade>
   )
 }
 
